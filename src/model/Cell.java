@@ -8,7 +8,6 @@ public class Cell implements Serializable {
     // the position for chess
     private ChessPiece piece;
 
-
     public ChessPiece getPiece() {
         return piece;
     }

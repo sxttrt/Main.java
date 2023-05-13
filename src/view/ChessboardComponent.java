@@ -3,13 +3,12 @@ package view;
 
 import controller.GameController;
 import model.*;
+import view.animal.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static model.Constant.CHESSBOARD_COL_SIZE;
@@ -46,15 +45,32 @@ public class ChessboardComponent extends JComponent {
         Cell[][] grid = chessboard.getGrid();
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
-                // TODO: Implement the initialization checkerboard
-
                 if (grid[i][j].getPiece() != null) {
                     ChessPiece chessPiece = grid[i][j].getPiece();
-                    System.out.println(chessPiece.getOwner());
-                    gridComponents[i][j].add(
-                            new ElephantChessComponent(
-                                    chessPiece.getOwner(),
-                                    CHESS_SIZE));
+                    if (chessPiece.getName().equals("Elephant")) {
+                        gridComponents[i][j].add(new Elephant(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Lion")) {
+                        gridComponents[i][j].add(new Lion(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Tiger")) {
+                        gridComponents[i][j].add(new Tiger(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Leopard")) {
+                        gridComponents[i][j].add(new Leopard(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Wolf")) {
+                        gridComponents[i][j].add(new Wolf(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Dog")) {
+                        gridComponents[i][j].add(new Dog(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Cat")) {
+                        gridComponents[i][j].add(new Cat(chessPiece.getOwner(), CHESS_SIZE));
+                    }
+                    if (chessPiece.getName().equals("Rat")) {
+                        gridComponents[i][j].add(new Rat(chessPiece.getOwner(), CHESS_SIZE));
+                    }
                 }
             }
         }
@@ -97,13 +113,13 @@ public class ChessboardComponent extends JComponent {
         this.gameController = gameController;
     }
 
-    public void setChessComponentAtGrid(ChessboardPoint point, ElephantChessComponent chess) {
+    public void setChessComponentAtGrid(ChessboardPoint point, Animal chess) {
         getGridComponentAt(point).add(chess);
     }
 
-    public ElephantChessComponent removeChessComponentAtGrid(ChessboardPoint point) {
+    public Animal removeChessComponentAtGrid(ChessboardPoint point) {
         // Note re-validation is required after remove / removeAll.
-        ElephantChessComponent chess = (ElephantChessComponent) getGridComponentAt(point).getComponents()[0];
+        Animal chess = (Animal) getGridComponentAt(point).getComponents()[0];
         getGridComponentAt(point).removeAll();
         getGridComponentAt(point).revalidate();
         chess.setSelected(false);
@@ -138,7 +154,7 @@ public class ChessboardComponent extends JComponent {
                 gameController.onPlayerClickCell(getChessboardPoint(e.getPoint()), (CellComponent) clickedComponent);
             } else {
                 System.out.print("One chess here and ");
-                gameController.onPlayerClickChessPiece(getChessboardPoint(e.getPoint()), (ElephantChessComponent) clickedComponent.getComponents()[0]);
+                gameController.onPlayerClickChessPiece(getChessboardPoint(e.getPoint()), (Animal) clickedComponent.getComponents()[0]);
             }
         }
     }
