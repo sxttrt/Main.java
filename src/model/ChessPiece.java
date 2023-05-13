@@ -7,6 +7,11 @@ public class ChessPiece {
 
     // Elephant? Cat? Dog? ...
     private String name;
+
+    public int getRank() {
+        return rank;
+    }
+
     private int rank;
 
     public ChessPiece(PlayerColor owner, String name, int rank) {
