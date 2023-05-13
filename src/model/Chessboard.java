@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The Chessboard has 9*7 cells, and each cell has a position for chess
  */
 public class Chessboard {
-    private Cell[][] grid;
+    public Cell[][] grid;
     public ArrayList<Step> steps;
     public ArrayList<ChessPiece> deadBlueChess;
     public ArrayList<ChessPiece> deadRedChess;
@@ -30,6 +30,11 @@ public class Chessboard {
     }
 
     private void initPieces() {
+        for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                grid[i][j].removePiece();
+            }
+        }
         grid[6][0].setPiece(new ChessPiece(PlayerColor.BLUE, "Elephant",8));
         grid[2][6].setPiece(new ChessPiece(PlayerColor.RED, "Elephant",8));
         grid[8][6].setPiece(new ChessPiece(PlayerColor.BLUE, "Lion", 7));
@@ -68,6 +73,34 @@ public class Chessboard {
 
     private void setChessPiece(ChessboardPoint point, ChessPiece chessPiece) {
         getGridAt(point).setPiece(chessPiece);
+            if (isEnemyTrap(point, chessPiece.getOwner())){
+                chessPiece.rank = 0;
+            } else {
+                if (chessPiece.getName().equals("Elephant")){
+                    chessPiece.rank = 8;
+                }
+                if (chessPiece.getName().equals("Lion")){
+                    chessPiece.rank = 7;
+                }
+                if (chessPiece.getName().equals("Tiger")){
+                    chessPiece.rank = 6;
+                }
+                if (chessPiece.getName().equals("Leopard")){
+                    chessPiece.rank = 5;
+                }
+                if (chessPiece.getName().equals("Wolf")){
+                    chessPiece.rank = 4;
+                }
+                if (chessPiece.getName().equals("Dog")){
+                    chessPiece.rank = 3;
+                }
+                if (chessPiece.getName().equals("Cat")){
+                    chessPiece.rank = 2;
+                }
+                if (chessPiece.getName().equals("Rat")){
+                    chessPiece.rank = 1;
+                }
+            }
     }
 
     public void moveChessPiece(ChessboardPoint src, ChessboardPoint dest) {
@@ -75,12 +108,12 @@ public class Chessboard {
             throw new IllegalArgumentException("Illegal chess move!");
         }
         ChessPiece newChess = removeChessPiece(src);
-        setChessPiece(dest, removeChessPiece(src));
+        setChessPiece(dest, newChess);
         steps.add(new Step(src,dest,newChess.getOwner()));
     }
 
     public void capture(ChessboardPoint src, ChessboardPoint dest) {
-        if (isValidCapture(src, dest)) {
+        if (!isValidCapture(src, dest)) {
             throw new IllegalArgumentException("Illegal chess capture!");
         }
         ChessPiece eater = getChessPieceAt(src);
@@ -168,9 +201,9 @@ public class Chessboard {
         return false;
     }
     private boolean isRiver(ChessboardPoint point){
-        return point.getRow() >= 3 && point.getRow() < 5
-                && point.getCol() >= 1 && point.getCol() <= 2
-                && point.getCol() >= 4 && point.getCol() <= 5;
+        return (point.getRow() >= 3 && point.getRow() < 5)
+                && ((point.getCol() >= 1 && point.getCol() <= 2
+                || (point.getCol() >= 4 && point.getCol() <= 5)));
     }
     private boolean isDens(ChessboardPoint point){
             return (point.getRow() == 8 && point.getCol() == 3)

@@ -2,14 +2,12 @@ package controller;
 
 
 import listener.GameListener;
-import model.Constant;
-import model.PlayerColor;
-import model.Chessboard;
-import model.ChessboardPoint;
+import model.*;
 import view.CellComponent;
 import view.ChessboardComponent;
 import view.animal.*;
 
+import java.util.ArrayList;
 /**
  * Controller is the connection between model and view,
  * when a Controller receive a request from a view, the Controller
@@ -19,21 +17,28 @@ import view.animal.*;
 */
 public class GameController implements GameListener {
 
-    private Chessboard model;
-    private ChessboardComponent view;
-    private PlayerColor currentPlayer;
+    public Chessboard chessboard;
+    public ChessboardComponent view;
+    public ArrayList<ChessboardPoint> canStepPoints;
+    public PlayerColor currentPlayer;
+    public PlayerColor winner;
+    public boolean skip;
+    public boolean isPlayback;
 
     // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
 
-    public GameController(ChessboardComponent view, Chessboard model) {
+    public GameController(ChessboardComponent view, Chessboard chessboard) {
         this.view = view;
-        this.model = model;
+        this.chessboard = chessboard;
         this.currentPlayer = PlayerColor.BLUE;
+        this.winner=null;
+        isPlayback = false;
+        skip = false;
 
         view.registerController(this);
         initialize();
-        view.initiateChessComponent(model);
+        view.initiateChessComponent(chessboard);
         view.repaint();
     }
 
@@ -50,8 +55,13 @@ public class GameController implements GameListener {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
     }
 
-    private boolean win() {
-        // TODO: Check the board if there is a winner
+    private boolean checkWin() {
+        if (chessboard.grid[0][3].getPiece() != null || chessboard.deadRedChess.size() == 8){
+            this.winner = PlayerColor.BLUE;
+        }
+        if (chessboard.grid[8][3].getPiece() != null || chessboard.deadBlueChess.size() == 8){
+            this.winner = PlayerColor.RED;
+        }
         return false;
     }
 
@@ -59,13 +69,19 @@ public class GameController implements GameListener {
     // click an empty cell
     @Override
     public void onPlayerClickCell(ChessboardPoint point, CellComponent component) {
-        if (selectedPoint != null && model.isValidMove(selectedPoint, point)) {
-            model.moveChessPiece(selectedPoint, point);
+        if (selectedPoint != null && chessboard.isValidMove(selectedPoint, point)) {
+            chessboard.moveChessPiece(selectedPoint, point);
+            clearCanStep();
+            canStepPoints=null;
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
             selectedPoint = null;
             swapColor();
+            component.revalidate();
             view.repaint();
-            // TODO: if the chess enter Dens or Traps and so on
+            checkWin();
+            if(winner!=null){
+                //TODO:重返初始界面之类的
+            }
         }
     }
 
@@ -73,16 +89,62 @@ public class GameController implements GameListener {
     @Override
     public void onPlayerClickChessPiece(ChessboardPoint point, Animal component) {
         if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
+            if (chessboard.getChessPieceOwner(point).equals(currentPlayer)) {
+                canStepPoints= getCanStepPoints(point);
                 selectedPoint = point;
                 component.setSelected(true);
+                component.revalidate();
                 component.repaint();
+                view.repaint();
+                view.revalidate();
             }
         } else if (selectedPoint.equals(point)) {
             selectedPoint = null;
+            canStepPoints = null;
+            clearCanStep();
             component.setSelected(false);
+            component.revalidate();
             component.repaint();
+        } else if (chessboard.isValidCapture(selectedPoint, point)) {
+                chessboard.capture(selectedPoint, point);
+                view.removeChessComponentAtGrid(point);
+                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
+                selectedPoint = null;
+                clearCanStep();
+                swapColor();
+                view.repaint();
+                view.revalidate();
+                component.revalidate();
+
+                checkWin();
+            if (winner != null){
+               //TODO:重开
+            }
         }
-        // TODO: Implement capture function
+
+    }
+    public void clearCanStep(){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                view.gridComponents[i][j].canStep = false;
+            }
+        }
+    }
+    public ArrayList<ChessboardPoint> getCanStepPoints(ChessboardPoint src) {
+        ArrayList<ChessboardPoint> list = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                ChessboardPoint dest = new ChessboardPoint(i, j);
+                if (chessboard.isValidMove(src, dest)){
+                    view.gridComponents[i][j].canStep = true;
+                    list.add(dest);
+                }
+                if (chessboard.isValidCapture(src, dest)){
+                    view.gridComponents[i][j].canStep = true;
+                    list.add(dest);
+                }
+            }
+        }
+        return list;
     }
 }

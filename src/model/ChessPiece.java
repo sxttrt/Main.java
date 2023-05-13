@@ -12,7 +12,7 @@ public class ChessPiece {
         return rank;
     }
 
-    private int rank;
+    public int rank;
 
     public ChessPiece(PlayerColor owner, String name, int rank) {
         this.owner = owner;
