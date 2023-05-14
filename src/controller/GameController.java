@@ -16,6 +16,7 @@ import java.util.ArrayList;
  *
 */
 public class GameController implements GameListener {
+    //change change
 
     public Chessboard chessboard;
     public ChessboardComponent view;
