@@ -80,6 +80,7 @@ public class GameController implements GameListener {
             view.repaint();
             checkWin();
             if(winner!=null){
+                System.out.println("winner is: "+winner);
                 //TODO:重返初始界面之类的
             }
         }
@@ -115,9 +116,9 @@ public class GameController implements GameListener {
                 view.repaint();
                 view.revalidate();
                 component.revalidate();
-
                 checkWin();
             if (winner != null){
+                System.out.println("winner is: "+winner);
                //TODO:重开
             }
         }

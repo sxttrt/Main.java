@@ -201,9 +201,10 @@ public class Chessboard {
         return false;
     }
     private boolean isRiver(ChessboardPoint point){
-        return (point.getRow() >= 3 && point.getRow() < 5)
-                && ((point.getCol() >= 1 && point.getCol() <= 2
-                || (point.getCol() >= 4 && point.getCol() <= 5)));
+        return point.getRow() >= 3
+                && point.getRow() <= 5
+                && (point.getCol() == 1 || point.getCol() == 2 || point.getCol() == 4 || point.getCol() == 5);
+
     }
     private boolean isDens(ChessboardPoint point){
             return (point.getRow() == 8 && point.getCol() == 3)
