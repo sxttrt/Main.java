@@ -21,7 +21,7 @@ public class Chessboard {
         deadRedChess = new ArrayList<>();
     }
 
-    private void initGrid() {
+    public void initGrid() {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 grid[i][j] = new Cell();
@@ -29,7 +29,7 @@ public class Chessboard {
         }
     }
 
-    private void initPieces() {
+    public void initPieces() {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 grid[i][j].removePiece();

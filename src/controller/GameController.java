@@ -81,7 +81,7 @@ public class GameController implements GameListener {
             checkWin();
             if(winner!=null){
                 System.out.println("winner is: "+winner);
-                //TODO:重返初始界面之类的
+                reset();
             }
         }
     }
@@ -106,6 +106,8 @@ public class GameController implements GameListener {
             component.setSelected(false);
             component.revalidate();
             component.repaint();
+            view.repaint();
+            view.revalidate();
         } else if (chessboard.isValidCapture(selectedPoint, point)) {
                 chessboard.capture(selectedPoint, point);
                 view.removeChessComponentAtGrid(point);
@@ -119,7 +121,7 @@ public class GameController implements GameListener {
                 checkWin();
             if (winner != null){
                 System.out.println("winner is: "+winner);
-               //TODO:重开
+                reset();
             }
         }
 
@@ -147,5 +149,27 @@ public class GameController implements GameListener {
             }
         }
         return list;
+    }
+    public void reset(){
+        canStepPoints = null;
+        chessboard.initGrid();
+        chessboard.initPieces();
+        view.removeChessComponent();
+        view.initiateChessComponent(chessboard);
+        view.initiateGridComponents();
+        currentPlayer = PlayerColor.BLUE;
+        selectedPoint =null;
+        clearCanStep();
+        chessboard.steps=null;
+        chessboard.deadBlueChess = null;
+        chessboard.deadRedChess = null;
+        view.revalidate();
+        view.repaint();
+        winner = null;
+    }
+    public void regret(){
+        chessboard.steps.remove(chessboard.steps.size()-1);
+        ArrayList <Step> tempList = chessboard.steps;
+
     }
 }

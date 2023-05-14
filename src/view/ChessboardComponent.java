@@ -125,6 +125,13 @@ public class ChessboardComponent extends JComponent {
         chess.setSelected(false);
         return chess;
     }
+    public void removeChessComponent() {
+        for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
+                //TODO:清楚棋盘上的动画（我不太会弄）
+            }
+        }
+    }
 
     private CellComponent getGridComponentAt(ChessboardPoint point) {
         return gridComponents[point.getRow()][point.getCol()];
