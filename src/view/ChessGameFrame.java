@@ -73,6 +73,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
+
 //    private void addLoadButton() {
 //        JButton button = new JButton("Load");
 //        button.setLocation(HEIGTH, HEIGTH / 10 + 240);

@@ -128,9 +128,7 @@ public class ChessboardComponent extends JComponent {
     public void removeChessComponent() {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
-                try {
-                    gridComponents[i][j].remove(0);
-                } catch (Exception e){}
+                //TODO:清楚棋盘上的动画（我不太会弄）
             }
         }
     }
