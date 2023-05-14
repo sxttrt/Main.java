@@ -8,8 +8,7 @@ import view.ChessboardComponent;
 import view.animal.*;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 /**
  * Controller is the connection between model and view,
@@ -186,11 +185,20 @@ public class GameController implements GameListener {
         else if (chess.getName().equals("Dog")) return "d";
         else if (chess.getName().equals("Cat")) return "c";
         else if (chess.getName().equals("Rat")) return "r";
-        else return " ";
+        else return "";
     }
 
     private static boolean checkName(String[] chessPlace) {
+        int numberE=0,numberL=0,numberT=0,numberl=0,numberw=0,numberd=0,numberc=0,numberr=0;
         for (int i = 0; i < chessPlace.length; i++) {
+            if(chessPlace[i].equals("E")){numberE++;}
+            if(chessPlace[i].equals("L")){numberL++;}
+            if(chessPlace[i].equals("T")){numberT++;}
+            if(chessPlace[i].equals("l")){numberl++;}
+            if(chessPlace[i].equals("w")){numberw++;}
+            if(chessPlace[i].equals("d")){numberd++;}
+            if(chessPlace[i].equals("c")){numberc++;}
+            if(chessPlace[i].equals("r")){numberr++;}
             if (!chessPlace[i].equals("E")
                     && !chessPlace[i].equals("L")
                     && !chessPlace[i].equals("T")
@@ -202,6 +210,9 @@ public class GameController implements GameListener {
                     && !chessPlace[i].equals("+")) {
                 return false;
             }
+        }
+        if (numberE>2 || numberT>2 || numberL>2 || numberl>2 || numberw>2 || numberd>2 || numberc>2 || numberr>2){
+            return false;
         }
         return true;
     }
@@ -302,4 +313,120 @@ public class GameController implements GameListener {
             ex.printStackTrace();
         }
     }
-}
+    public boolean loadGame(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory( new File ("save"));
+        chooser.showOpenDialog(view);
+        File file = chooser.getSelectedFile();
+
+        if(!file.getName().endsWith(".txt")){
+            JOptionPane.showMessageDialog(null, "文件后缀错误\n错误编码： 101",
+                    "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+            reset();
+            return false;
+        }
+
+        try {
+            String temp;
+            ArrayList<String> readList = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "GBK"));
+
+            while (true) {
+                temp = reader.readLine();
+                if (temp != null && !"".equals(temp)) {
+                    readList.add(temp);
+                } else {
+                    break;
+                }
+            }
+
+            int num = Integer.parseInt(readList.remove(0));
+
+            for (int i = 0; i <= num; i++) {
+                String str = readList.get(i);
+                if (i % 2 == 0 && str.charAt(0) != 'b') {
+                    JOptionPane.showMessageDialog(null, "行棋方错误\n错误编码：104",
+                            "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                    reset();
+                    return false;
+                }
+                if (i % 2 == 1 && str.charAt(0) != 'r'){
+                    //System.out.println(str);
+                    JOptionPane.showMessageDialog(null, "行棋方错误\n错误编码：104",
+                            "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                    reset();
+                    return false;
+                }
+            }
+
+            try {
+                for (int i = num + 1; i < num + 10; i++) {
+                    String[] chess = readList.get(i).split(" ");
+                    if (chess.length != 7) {
+                        JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
+                                "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                        reset();
+                        return false;
+                    }
+                    if (!checkName(chess)) {
+                        JOptionPane.showMessageDialog(null, "棋子错误\n错误编码：103",
+                                "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                        reset();
+                        return false;
+                    }
+                }
+            }
+                catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
+                            "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                    reset();
+                    return false;
+                }
+
+                reset();
+                for (int i = 0; i < num; i++) {
+                    String[] step = readList.get(i).split(" ");
+                    ChessboardPoint src = new ChessboardPoint(Integer.parseInt(step[1].charAt(1) + " "), Integer.parseInt(step[1].charAt(3) + " "));
+                    ChessboardPoint dest = new ChessboardPoint(Integer.parseInt(step[2].charAt(1) + ""), Integer.parseInt(step[2].charAt(3) + ""));
+
+                    boolean isCapture = !step[3].equals("null");
+                    if (!isCapture) {
+                        if (!chessboard.isValidMove(src, dest)) {
+                            JOptionPane.showMessageDialog(null, "行棋步骤错误\n错误编码：105",
+                                    "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                            reset();
+                            return false;
+                        }
+                        chessboard.moveChessPiece(src, dest);
+                        view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
+                        selectedPoint = null;
+                        swapColor();
+                        view.revalidate();
+                        view.repaint();
+                    } else {
+                        if (!chessboard.isValidCapture(src, dest)) {
+                            JOptionPane.showMessageDialog(null, "行棋步骤错误\n错误编码：105",
+                                    "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                            reset();
+                            return false;
+                        }
+                        chessboard.capture(src, dest);
+                        view.removeChessComponentAtGrid(dest);
+                        view.setChessComponentAtGrid(src, view.removeChessComponentAtGrid(dest));
+                        selectedPoint = null;
+                        swapColor();
+                        view.revalidate();
+                        view.repaint();
+                    }
+                }
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "无此存档\n错误编码： 106",
+                        "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
+                reset();
+                return false;
+            }
+        return true;
+        }
+    }
+
