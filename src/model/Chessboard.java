@@ -116,10 +116,16 @@ public class Chessboard {
         if (!isValidCapture(src, dest)) {
             throw new IllegalArgumentException("Illegal chess capture!");
         }
-        ChessPiece eater = getChessPieceAt(src);
-        ChessPiece enemy = getChessPieceAt(dest);
+        ChessPiece eater = removeChessPiece(src);
+        ChessPiece enemy = removeChessPiece(dest);
         setChessPiece(dest,eater);
-        steps.add(new Step(src,dest,eater.getOwner(),enemy));
+        if (enemy.getOwner() == PlayerColor.BLUE) {
+            deadRedChess.add(enemy);
+        }
+        else {
+            deadRedChess.add(enemy);
+        }
+        steps.add(new Step(src, dest, eater.getOwner(), enemy));
     }
 
     public Cell[][] getGrid() {
@@ -205,10 +211,6 @@ public class Chessboard {
                 && point.getRow() <= 5
                 && (point.getCol() == 1 || point.getCol() == 2 || point.getCol() == 4 || point.getCol() == 5);
 
-    }
-    private boolean isDens(ChessboardPoint point){
-            return (point.getRow() == 8 && point.getCol() == 3)
-                    || (point.getRow() == 0 && point.getCol() == 3);
     }
 
     private boolean isEnemyTrap(ChessboardPoint point, PlayerColor color){

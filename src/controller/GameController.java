@@ -80,8 +80,10 @@ public class GameController implements GameListener {
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
             selectedPoint = null;
             swapColor();
-            component.revalidate();
+            view.revalidate();
             view.repaint();
+            component.revalidate();
+            component.repaint();
             checkWin();
             if (winner != null) {
                 System.out.println("winner is: " + winner);
@@ -100,8 +102,8 @@ public class GameController implements GameListener {
                 component.setSelected(true);
                 component.revalidate();
                 component.repaint();
-                view.repaint();
                 view.revalidate();
+                view.repaint();
             }
         } else if (selectedPoint.equals(point)) {
             selectedPoint = null;
@@ -110,8 +112,8 @@ public class GameController implements GameListener {
             component.setSelected(false);
             component.revalidate();
             component.repaint();
-            view.repaint();
             view.revalidate();
+            view.repaint();
         } else if (chessboard.isValidCapture(selectedPoint, point)) {
             chessboard.capture(selectedPoint, point);
             view.removeChessComponentAtGrid(point);
@@ -119,9 +121,10 @@ public class GameController implements GameListener {
             selectedPoint = null;
             clearCanStep();
             swapColor();
-            view.repaint();
             view.revalidate();
+            view.repaint();
             component.revalidate();
+            component.repaint();
             checkWin();
             if (winner != null) {
                 System.out.println("winner is: " + winner);
@@ -176,7 +179,7 @@ public class GameController implements GameListener {
     }
 
     private static String animalShortWriting(ChessPiece chess) {
-        if (chess == null) return "+";
+        if (chess == null) return "O";
         else if (chess.getName().equals("Elephant")) return "E";
         else if (chess.getName().equals("Lion")) return "L";
         else if (chess.getName().equals("Tiger")) return "T";
@@ -351,7 +354,6 @@ public class GameController implements GameListener {
                     return false;
                 }
                 if (i % 2 == 1 && str.charAt(0) != 'r'){
-                    //System.out.println(str);
                     JOptionPane.showMessageDialog(null, "行棋方错误\n错误编码：104",
                             "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
                     reset();
