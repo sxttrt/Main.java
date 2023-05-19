@@ -28,9 +28,9 @@ public class Elephant extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\blueElephant.png1");
+            pic = new ImageIcon("resource\\blueElephant.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\redElephant.png1");
+            pic = new ImageIcon("resource\\redElephant.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

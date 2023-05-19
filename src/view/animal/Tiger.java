@@ -28,9 +28,9 @@ public class Tiger extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\blueTiger.png1");
+            pic = new ImageIcon("resource\\blueTiger.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\redTiger.png1");
+            pic = new ImageIcon("resource\\redTiger.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));
