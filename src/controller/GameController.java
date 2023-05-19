@@ -81,10 +81,8 @@ public class GameController implements GameListener {
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
             selectedPoint = null;
             swapColor();
-            view.revalidate();
             view.repaint();
             component.revalidate();
-            component.repaint();
             checkWin();
             if (winner != null) {
                 System.out.println("winner is: " + winner);
@@ -125,7 +123,6 @@ public class GameController implements GameListener {
             view.revalidate();
             view.repaint();
             component.revalidate();
-            component.repaint();
             checkWin();
             if (winner != null) {
                 System.out.println("winner is: " + winner);

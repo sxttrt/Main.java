@@ -71,36 +71,12 @@ public class Chessboard {
         return chessPiece;
     }
 
-    private void setChessPiece(ChessboardPoint point, ChessPiece chessPiece) {
-        getGridAt(point).setPiece(chessPiece);
-            if (isEnemyTrap(point, chessPiece.getOwner())){
-                chessPiece.rank = 0;
-            } else {
-                if (chessPiece.getName().equals("Elephant")){
-                    chessPiece.rank = 8;
-                }
-                if (chessPiece.getName().equals("Lion")){
-                    chessPiece.rank = 7;
-                }
-                if (chessPiece.getName().equals("Tiger")){
-                    chessPiece.rank = 6;
-                }
-                if (chessPiece.getName().equals("Leopard")){
-                    chessPiece.rank = 5;
-                }
-                if (chessPiece.getName().equals("Wolf")){
-                    chessPiece.rank = 4;
-                }
-                if (chessPiece.getName().equals("Dog")){
-                    chessPiece.rank = 3;
-                }
-                if (chessPiece.getName().equals("Cat")){
-                    chessPiece.rank = 2;
-                }
-                if (chessPiece.getName().equals("Rat")){
-                    chessPiece.rank = 1;
-                }
+    private boolean checkTrap(ChessboardPoint point) {
+        ChessPiece enemy = getChessPieceAt(point);
+            if (isEnemyTrap(point, enemy.getOwner())){
+               return true;
             }
+            return false;
     }
 
     public void moveChessPiece(ChessboardPoint src, ChessboardPoint dest) {
@@ -108,7 +84,7 @@ public class Chessboard {
             throw new IllegalArgumentException("Illegal chess move!");
         }
         ChessPiece newChess = removeChessPiece(src);
-        setChessPiece(dest, newChess);
+        getGridAt(dest).setPiece(newChess);
         steps.add(new Step(src,dest,newChess.getOwner()));
     }
 
@@ -118,7 +94,7 @@ public class Chessboard {
         }
         ChessPiece eater = removeChessPiece(src);
         ChessPiece enemy = removeChessPiece(dest);
-        setChessPiece(dest,eater);
+        getGridAt(dest).setPiece(eater);
         if (enemy.getOwner() == PlayerColor.BLUE) {
             deadRedChess.add(enemy);
         }
@@ -141,30 +117,29 @@ public class Chessboard {
         if (myChess == null || enemyChess!= null) {
             return false;
         }
-        boolean b =calculateDistance(src,dest) == 1 ;
         if (myChess.getName().equals("Elephant")){
-            return  b && !isRiver(dest);
+            return  checkDistance(src,dest) && !isRiver(dest);
         }
         if (myChess.getName().equals("Lion")){
-            return (b && !isRiver(dest)) || canJumpRiver(src, dest);
+            return (checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest);
         }
         if (myChess.getName().equals("Tiger")){
-            return (b && !isRiver(dest)) || canJumpRiver(src, dest);
+            return (checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest);
         }
         if (myChess.getName().equals("Leopard")){
-            return b && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest);
         }
         if (myChess.getName().equals("Wolf")){
-            return b && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest);
         }
         if (myChess.getName().equals("Dog")){
-            return b && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest);
         }
         if (myChess.getName().equals("Cat")){
-            return b && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest);
         }
         if (myChess.getName().equals("Rat")){
-            return b;
+            return checkDistance(src,dest);
         }
         return false;
     }
@@ -173,7 +148,6 @@ public class Chessboard {
     public boolean isValidCapture(ChessboardPoint src, ChessboardPoint dest) {
         ChessPiece eater = getChessPieceAt(src);
         ChessPiece enemy = getChessPieceAt(dest);
-        boolean b =calculateDistance(src,dest) == 1 ;
         if (eater==null || enemy==null) {
             return false;
         }
@@ -181,30 +155,33 @@ public class Chessboard {
             return false;
         }
         if (eater.getName().equals("Elephant")){
-            return b && !isRiver(dest) && enemy.getRank() !=1;
+            return checkDistance(src,dest) && !isRiver(dest) && (enemy.getRank() !=1||checkTrap(dest));
         }
         if (eater.getName().equals("Lion")){
-            return ((b && !isRiver(dest)) || canJumpRiver(src, dest)) && enemy.getRank()<= 7;
+            return ((checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest)) && (enemy.getRank()<= 7||checkTrap(dest));
         }
         if (eater.getName().equals("Tiger")){
-            return ((b && !isRiver(dest)) || canJumpRiver(src, dest)) && enemy.getRank() <= 6;
+            return ((checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest)) && (enemy.getRank() <= 6||checkTrap(dest));
         }
         if (eater.getName().equals("Leopard")){
-            return b && !isRiver(dest) && enemy.getRank()<= 5;
+            return checkDistance(src,dest) && !isRiver(dest) && (enemy.getRank()<= 5||checkTrap(dest));
         }
         if (eater.getName().equals("Wolf")){
-            return b && !isRiver(dest) &&enemy.getRank()<= 4;
+            return checkDistance(src,dest) && !isRiver(dest) && (enemy.getRank()<= 4||checkTrap(dest));
         }
         if (eater.getName().equals("Dog")){
-            return b && !isRiver(dest) && enemy.getRank() <= 3;
+            return checkDistance(src,dest) && !isRiver(dest) && (enemy.getRank() <= 3||checkTrap(dest));
         }
         if (eater.getName().equals("Cat")){
-            return b && !isRiver(dest) && enemy.getRank() <= 2;
+            return checkDistance(src,dest) && !isRiver(dest) && (enemy.getRank() <= 2||checkTrap(dest));
         }
         if (eater.getName().equals("Rat")){
-            return b && (enemy.getRank() <= 1 || enemy.getRank() == 8) && !(isRiver(src) && !isRiver(dest));
+            return checkDistance(src,dest) && (enemy.getRank() <= 1 || enemy.getRank() == 8||checkTrap(dest)) && !(isRiver(src) && !isRiver(dest));
         }
         return false;
+    }
+    private boolean checkDistance(ChessboardPoint src,ChessboardPoint dest){
+        return calculateDistance(src,dest) == 1;
     }
     private boolean isRiver(ChessboardPoint point){
         return point.getRow() >= 3
