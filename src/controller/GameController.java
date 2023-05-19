@@ -31,6 +31,7 @@ public class GameController implements GameListener {
     private ChessboardPoint selectedPoint;
 
     private Thread thread;
+    public GameController(){}
 
     public GameController(ChessboardComponent view, Chessboard chessboard) {
         this.view = view;
@@ -221,6 +222,7 @@ public class GameController implements GameListener {
     }
 
     public void regret() {
+        Chessboard chessboard = new Chessboard();
         chessboard.steps.remove(chessboard.steps.size() - 1);
         ArrayList<Step> tempList = chessboard.steps;
         reset();

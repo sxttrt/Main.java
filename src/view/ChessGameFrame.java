@@ -31,6 +31,7 @@ public class ChessGameFrame extends JFrame {
         addChessboard();
         addLabel();
         addHelloButton();
+        addRegretButton();
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -73,6 +74,21 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }
+
+    private void addRegretButton() {
+        GameController re = new GameController();
+        JButton button = new JButton("Regret");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 250);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+        button.addActionListener((e) -> {
+            re.regret();
+        });
+    }
+
+
+
 
 //    private void addLoadButton() {
 //        JButton button = new JButton("Load");

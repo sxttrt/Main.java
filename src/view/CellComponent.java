@@ -1,5 +1,6 @@
 package view;
 
+import model.PlayerColor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
@@ -10,6 +11,7 @@ import java.awt.geom.RoundRectangle2D;
  */
 
 public class CellComponent extends JPanel {
+    public PlayerColor owner;
     private Color background;
     int size;
     public boolean canStep;
@@ -29,7 +31,8 @@ public class CellComponent extends JPanel {
         g.fillRect(1, 1, this.getWidth()-1, this.getHeight()-1);
         if (canStep) {
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(new Color(252, 49, 0, 150));
+            g2d.setColor(new Color(0, 0, 0, 150));
+
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(1, 1,
                     this.getWidth() - 1, this.getHeight() - 1, size / 4, size / 4);
             g2d.fill(roundedRectangle);

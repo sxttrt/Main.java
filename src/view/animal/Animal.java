@@ -27,12 +27,10 @@ public class Animal extends JComponent {
         super.paintComponent(g);
         if (isSelected()) { // Highlights the model if selected.
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(new Color(255, 255, 255, 150));
+            g2d.setColor(new Color(255, 255, 255, 255));
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(1, 1,
                     this.getWidth() - 1, this.getHeight() - 1, size / 4, size / 4);
             g2d.fill(roundedRectangle);
         }
-
-
     }
 }

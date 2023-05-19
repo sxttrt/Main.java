@@ -3,11 +3,7 @@ import model.PlayerColor;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class Leopard extends Animal {
-
-    private PlayerColor owner;
-    private boolean selected;
 
     public Leopard(PlayerColor owner, int size) {
         this.owner = owner;
@@ -15,6 +11,7 @@ public class Leopard extends Animal {
         setSize(size/2, size/2);
         setLocation(0,0);
         setVisible(true);
+        this.size = size;
     }
 
     public boolean isSelected() {
@@ -29,16 +26,18 @@ public class Leopard extends Animal {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Font font = new Font("楷体", Font.PLAIN, getWidth() / 2);
-        g2.setFont(font);
-        g2.setColor(owner.getColor());
-        g2.drawString("豹", getWidth() / 4, getHeight() * 5 / 8); // FIXME: Use library to find the correct offset.
-        if (isSelected()) { // Highlights the model if selected.
-            g.setColor(Color.RED);
-            g.drawOval(0, 0, getWidth() , getHeight());
+        ImageIcon pic = new ImageIcon();
+        if (owner == PlayerColor.BLUE){
+            pic = new ImageIcon("resource\\blueLeopard.png1");
+        }else if(owner == PlayerColor.RED){
+            pic = new ImageIcon("resource\\redLeopard.png1");
         }
+        Image image = pic.getImage();
+        pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));
+        JLabel label = new JLabel(pic);
+        label.setSize(size, size);
+        //bgLabel.setLocation(0, 0);
+        add(label);
     }
 }
 
