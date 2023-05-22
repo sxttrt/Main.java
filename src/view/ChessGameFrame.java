@@ -99,14 +99,14 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addRegretButton() {
-        GameController re = new GameController();
+
         JButton button = new JButton("Regret");
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
-            re.regret();
+            chessboardComponent.gameController.regret();
         });
     }
 

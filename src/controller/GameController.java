@@ -218,7 +218,6 @@ public class GameController implements GameListener {
     }
 
     public void regret() {
-        Chessboard chessboard = new Chessboard();
         chessboard.steps.remove(chessboard.steps.size() - 1);
         ArrayList<Step> tempList = chessboard.steps;
         reset();
