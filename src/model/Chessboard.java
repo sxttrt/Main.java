@@ -102,7 +102,7 @@ public class Chessboard {
             deadRedChess.add(enemy);
         }
         else {
-            deadRedChess.add(enemy);
+            deadBlueChess.add(enemy);
         }
         steps.add(new Step(src, dest, eater.getOwner(), enemy));
     }

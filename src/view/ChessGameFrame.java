@@ -16,12 +16,13 @@ public class ChessGameFrame extends JFrame {
     private final int ONE_CHESS_SIZE;
 
     private ChessboardComponent chessboardComponent;
+    JLabel statusLabel;
     public boolean isSpring;
     JLabel background;
     public final JLabel springBG;
     public final JLabel autumnBG;
     public ChessGameFrame(int width, int height) {
-        setTitle("2023 CS109 Project Demo"); //设置标题
+        setTitle("Jungle"); //设置标题
         this.WIDTH = width;
         this.HEIGTH = height;
         this.ONE_CHESS_SIZE = (HEIGTH * 4 / 5) / 9;
@@ -80,7 +81,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加标签
      */
     private void addLabel() {
-        JLabel statusLabel = new JLabel("Setting");
+        statusLabel = new JLabel("Turn 1 : BLUE");
         statusLabel.setLocation(HEIGTH, HEIGTH / 10);
         statusLabel.setSize(200, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -116,7 +117,6 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addThemeButton() {
-        GameController re = new GameController();
         JButton button = new JButton("Change Theme");
         button.setLocation(HEIGTH, HEIGTH / 10 + 300);
         button.setSize(200, 60);
@@ -186,6 +186,9 @@ public class ChessGameFrame extends JFrame {
             if (b) new LoadComponent();
         });
     }
+
+
+
 
 
 

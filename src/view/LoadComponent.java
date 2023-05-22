@@ -23,7 +23,7 @@ public class LoadComponent extends JFrame {
         setLayout(null);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        label = new JLabel("Waiting.");
+        label = new JLabel("");
         label.setLocation(45, 15);
         label.setSize(100, 40);
         label.setFont(new Font("Rockwell", Font.BOLD, 14));
@@ -41,7 +41,7 @@ public class LoadComponent extends JFrame {
                         e.printStackTrace();
                     }
 
-                    String text = "Waiting..";
+                    String text = "";
                     for (int i = 0; i < process; i++) {
                         text += ".";
                     }
