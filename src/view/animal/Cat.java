@@ -28,9 +28,9 @@ public class Cat extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\blueCat.JPEG1");
+            pic = new ImageIcon("resource\\bc.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\redCat.JPEG1");
+            pic = new ImageIcon("resource\\rc.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

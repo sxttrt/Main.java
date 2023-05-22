@@ -28,9 +28,9 @@ public class Dog extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\blueDog.JPEG1");
+            pic = new ImageIcon("resource\\bd.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\redDog.JPEG1");
+            pic = new ImageIcon("resource\\rd.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

@@ -173,6 +173,9 @@ public class GameController implements GameListener {
         view.revalidate();
         view.repaint();
         winner = null;
+
+        chessboard.deadRedChess = new ArrayList<>();
+        chessboard.deadBlueChess = new ArrayList<>();
     }
 
     private static String animalShortWriting(ChessPiece chess) {

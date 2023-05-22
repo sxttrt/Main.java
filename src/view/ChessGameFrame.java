@@ -34,7 +34,7 @@ public class ChessGameFrame extends JFrame {
 
         addChessboard();
         addLabel();
-        addHelloButton();
+        addResetButton();
         addRegretButton();
         addThemeButton();
         addPlaybackButton();
@@ -89,9 +89,12 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中增加一个按钮，如果按下的话就会显示Hello, world!
      */
 
-    private void addHelloButton() {
-        JButton button = new JButton("Show Hello Here");
-        button.addActionListener((e) -> JOptionPane.showMessageDialog(this, "Hello, world!"));
+
+    private void addResetButton() {
+        JButton button = new JButton("Reset");
+        button.addActionListener((e) -> {
+            chessboardComponent.gameController.reset();
+        });
         button.setLocation(HEIGTH, HEIGTH / 10 + 100);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
@@ -137,7 +140,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addPlaybackButton() {
-        JButton button = new JButton("Playback");
+        JButton button = new JButton("playBack");
         button.setLocation(HEIGTH, HEIGTH / 10 + 400);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
