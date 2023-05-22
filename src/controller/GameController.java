@@ -228,20 +228,20 @@ public class GameController implements GameListener {
             Step step = tempList.get(i);
             ChessboardPoint src = step.src;
             ChessboardPoint dest = step.dest;
-            if (step.captured != null) {
-                chessboard.capture(src, dest);
-                view.removeChessComponentAtGrid(dest);
-                view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
-                swapColor();
-                view.revalidate();
-                view.repaint();
-            } else {
+            boolean isCapture = step.captured != null;
+            if (! isCapture) {
                 chessboard.moveChessPiece(src, dest);
                 view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
                 selectedPoint = null;
                 swapColor();
-                view.revalidate();
                 view.repaint();
+            } else {
+                chessboard.capture(src, dest);
+                view.removeChessComponentAtGrid(dest);
+                view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
+                swapColor();
+                view.repaint();
+                view.revalidate();
             }
         }
     }
