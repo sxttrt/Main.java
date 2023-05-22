@@ -22,7 +22,7 @@ public class ChessboardComponent extends JComponent {
     private final int CHESS_SIZE;
     private final Set<ChessboardPoint> riverCell = new HashSet<>();
 
-    private GameController gameController;
+    public GameController gameController;
 
     public ChessboardComponent(int chessSize) {
         CHESS_SIZE = chessSize;
@@ -128,7 +128,9 @@ public class ChessboardComponent extends JComponent {
     public void removeChessComponent() {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
-                //TODO:覆盖动画
+                try {
+                    gridComponents[i][j].remove(0);
+                } catch (Exception e){}
             }
         }
     }
@@ -164,5 +166,24 @@ public class ChessboardComponent extends JComponent {
                 gameController.onPlayerClickChessPiece(getChessboardPoint(e.getPoint()), (Animal) clickedComponent.getComponents()[0]);
             }
         }
+    }
+
+    public void changeTheme(boolean isSpring){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (gridComponents[i][j].type == CellType.SPRING_GRASS) gridComponents[i][j].type = CellType.AUTUMN_GRASS;
+                else if (gridComponents[i][j].type == CellType.SPRING_RIVER) gridComponents[i][j].type = CellType.AUTUMN_RIVER;
+                else if (gridComponents[i][j].type == CellType.AUTUMN_GRASS) gridComponents[i][j].type = CellType.SPRING_GRASS;
+                else if (gridComponents[i][j].type == CellType.AUTUMN_RIVER) gridComponents[i][j].type = CellType.SPRING_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_GRASS && isSpring) gridComponents[i][j].type = CellType.AUTUMN_GRASS;
+                else if (gridComponents[i][j].type == CellType.OTHER_RIVER && isSpring) gridComponents[i][j].type = CellType.AUTUMN_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_GRASS && !isSpring) gridComponents[i][j].type = CellType.SPRING_GRASS;
+                else if (gridComponents[i][j].type == CellType.OTHER_RIVER && !isSpring) gridComponents[i][j].type = CellType.SPRING_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_TRAP) gridComponents[i][j].type = CellType.TRAP;
+                else if (gridComponents[i][j].type == CellType.OTHER_DEN) gridComponents[i][j].type = CellType.DEN;
+            }
+        }
+        repaint();
+        revalidate();
     }
 }

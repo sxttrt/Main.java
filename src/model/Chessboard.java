@@ -80,6 +80,9 @@ public class Chessboard {
     }
 
     public void moveChessPiece(ChessboardPoint src, ChessboardPoint dest) {
+        if (steps == null) {
+            steps = new ArrayList<>();
+        }
         if (!isValidMove(src, dest)) {
             throw new IllegalArgumentException("Illegal chess move!");
         }

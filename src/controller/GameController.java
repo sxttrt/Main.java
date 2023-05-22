@@ -6,7 +6,6 @@ import model.*;
 import view.CellComponent;
 import view.ChessboardComponent;
 import view.animal.*;
-
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class GameController implements GameListener {
     private ChessboardPoint selectedPoint;
 
     private Thread thread;
+    public static Timer timer;
     public GameController(){}
 
     public GameController(ChessboardComponent view, Chessboard chessboard) {

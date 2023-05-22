@@ -14,8 +14,7 @@ public class Main {
             ChessGameFrame mainFrame = new ChessGameFrame(1100, 810);
             GameController gameController = new GameController(mainFrame.getChessboardComponent(), new Chessboard());
             mainFrame.setVisible(true);
-//            new BackgroundMusic().playMusic("resource\\bgm3.wav");
+           new BackgroundMusic().playMusic("resource\\bgm\\bgm3.wav");
         });
     }
 }
-//

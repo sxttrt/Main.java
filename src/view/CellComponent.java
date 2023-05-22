@@ -1,5 +1,6 @@
 package view;
 
+import model.CellType;
 import model.PlayerColor;
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class CellComponent extends JPanel {
     private Color background;
     int size;
     public boolean canStep;
+    public CellType type;
 
     public CellComponent(Color background, Point location, int size) {
         setLayout(new GridLayout(1,1));
