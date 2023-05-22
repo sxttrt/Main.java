@@ -102,7 +102,6 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addRegretButton() {
-
         JButton button = new JButton("Regret");
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
