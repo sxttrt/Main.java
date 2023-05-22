@@ -164,13 +164,12 @@ public class GameController implements GameListener {
         chessboard.initPieces();
         view.removeChessComponent();
         view.initiateChessComponent(chessboard);
-        view.initiateGridComponents();
         currentPlayer = PlayerColor.BLUE;
         selectedPoint = null;
         clearCanStep();
-        chessboard.steps = null;
-        chessboard.deadBlueChess = null;
-        chessboard.deadRedChess = null;
+        chessboard.steps = new ArrayList<>();
+        chessboard.deadBlueChess = new ArrayList<>();
+        chessboard.deadRedChess = new ArrayList<>();
         view.revalidate();
         view.repaint();
         winner = null;
