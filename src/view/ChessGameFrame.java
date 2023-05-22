@@ -38,6 +38,8 @@ public class ChessGameFrame extends JFrame {
         addRegretButton();
         addThemeButton();
         addPlaybackButton();
+        addSaveButton();
+        addLoadButton();
 
         Image image = new ImageIcon("resource/background/spring.png").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
@@ -149,6 +151,39 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener(e -> {
             System.out.println("Click playback");
             chessboardComponent.gameController.playBack();
+        });
+    }
+
+    private void addSaveButton() {
+        JButton button = new JButton("Save");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 500);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click save");
+            String path = JOptionPane.showInputDialog("存档名");
+            while (path.equals("")){
+                JOptionPane.showMessageDialog(null, "存档名不能为空");
+                path = JOptionPane.showInputDialog("存档名");
+            }
+            chessboardComponent.gameController.saveGame(path);
+            new LoadComponent();
+        });
+    }
+
+    private void addLoadButton() {
+        JButton button = new JButton("Load");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 600);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click load");
+            boolean b = chessboardComponent.gameController.loadGame();
+            if (b) new LoadComponent();
         });
     }
 

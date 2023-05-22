@@ -70,6 +70,10 @@ public class GameController implements GameListener {
         return false;
     }
 
+    public void doWin(){
+        JOptionPane.showMessageDialog(view, "Congratulations!" + (winner == PlayerColor.BLUE ? "BLUE" : "RED") + " Win the game");
+    }
+
 
     // click an empty cell
     @Override
@@ -85,7 +89,7 @@ public class GameController implements GameListener {
             component.revalidate();
             checkWin();
             if (winner != null) {
-                System.out.println("winner is: " + winner);
+                doWin();
                 reset();
             }
         }
@@ -125,7 +129,7 @@ public class GameController implements GameListener {
             component.revalidate();
             checkWin();
             if (winner != null) {
-                System.out.println("winner is: " + winner);
+                doWin();
                 reset();
             }
         }
