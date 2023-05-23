@@ -1,0 +1,77 @@
+66
+b (6,6) (5,6) null
+r (2,6) (3,6) null
+b (5,6) (4,6) null
+r (2,4) (2,3) null
+b (4,6) (3,6) Elephant
+r (2,3) (3,3) null
+b (6,2) (6,3) null
+r (3,3) (4,3) null
+b (6,3) (5,3) null
+r (4,3) (5,3) Wolf
+b (6,0) (5,0) null
+r (2,0) (2,1) null
+b (5,0) (4,0) null
+r (2,1) (3,1) null
+b (7,1) (6,1) null
+r (3,1) (4,1) null
+b (4,0) (3,0) null
+r (2,2) (2,1) null
+b (3,0) (2,0) null
+r (0,0) (1,0) null
+b (2,0) (2,1) Leopard
+r (1,1) (1,2) null
+b (2,1) (2,2) null
+r (1,5) (2,5) null
+b (2,2) (1,2) Dog
+r (1,0) (1,1) null
+b (1,2) (2,2) null
+r (2,5) (1,5) null
+b (2,2) (2,3) null
+r (1,5) (1,4) null
+b (2,3) (1,3) null
+r (1,4) (2,4) null
+b (1,3) (2,3) null
+r (2,4) (1,4) null
+b (3,6) (2,6) null
+r (0,6) (1,6) null
+b (8,6) (7,6) null
+r (1,6) (1,5) null
+b (2,6) (2,5) null
+r (1,5) (2,5) Rat
+b (7,6) (6,6) null
+r (5,3) (6,3) null
+b (6,4) (6,3) Wolf
+r (1,1) (2,1) null
+b (6,1) (6,0) null
+r (2,1) (2,0) null
+b (6,0) (5,0) null
+r (2,0) (3,0) null
+b (5,0) (4,0) null
+r (3,0) (4,0) Cat
+b (8,0) (7,0) null
+r (4,0) (5,0) null
+b (7,0) (7,1) null
+r (5,0) (6,0) null
+b (6,6) (6,5) null
+r (6,0) (6,1) null
+b (7,5) (7,4) null
+r (6,1) (7,1) Tiger
+b (6,3) (6,2) null
+r (7,1) (7,2) null
+b (2,3) (1,3) null
+r (1,4) (1,3) Elephant
+b (7,4) (6,4) null
+r (7,2) (6,2) Leopard
+b (6,4) (6,3) null
+r (6,2) (6,3) Dog
+b
+O O O O O O O 
+O O O c O O O 
+O O O O O T O 
+O O O O O O O 
+O r O O O O O 
+O O O O O O O 
+O O O L O L O 
+O O O O O O O 
+O O O O O O O 

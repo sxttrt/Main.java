@@ -61,8 +61,6 @@ public class LoadComponent extends JFrame {
             }
         });
         thread.start();
-
-
     }
 
     @Override

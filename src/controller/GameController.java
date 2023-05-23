@@ -5,10 +5,13 @@ import listener.GameListener;
 import model.*;
 import view.CellComponent;
 import view.ChessboardComponent;
+import view.ChessGameFrame;
 import view.animal.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Controller is the connection between model and view,
  * when a Controller receive a request from a view, the Controller
@@ -23,16 +26,14 @@ public class GameController implements GameListener {
     public ArrayList<ChessboardPoint> canStepPoints;
     public PlayerColor currentPlayer;
     public PlayerColor winner;
+    public boolean AIPlaying=false;
     public boolean skip;
     public boolean isPlayback;
 
     // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
-
     private Thread thread;
     public static Timer timer;
-    public GameController(){}
-
     public GameController(ChessboardComponent view, Chessboard chessboard) {
         this.view = view;
         this.chessboard = chessboard;
@@ -92,6 +93,9 @@ public class GameController implements GameListener {
                 doWin();
                 reset();
             }
+            if (AIPlaying) {
+                AI();
+            }
         }
     }
 
@@ -131,6 +135,9 @@ public class GameController implements GameListener {
             if (winner != null) {
                 doWin();
                 reset();
+            }
+            if (AIPlaying) {
+                AI();
             }
         }
 
@@ -306,7 +313,7 @@ public class GameController implements GameListener {
             for(int i=0;i<chessboard.steps.size();i++){
                 fileWriter.write(chessboard.steps.get(i).toString()+"\n");
             }
-            fileWriter.write(currentPlayer == PlayerColor.BLUE ? "b" : "r"+"\n");
+            fileWriter.write(currentPlayer == PlayerColor.BLUE ? "b"+"\n" : "r"+"\n");
 
             for(int i=0;i<9;i++){
                 for(int j=0;j<7;j++){
@@ -370,7 +377,7 @@ public class GameController implements GameListener {
                 for (int i = num+1 ; i < num + 10; i++) {
                     String[] chess = readList.get(i).split(" ");
                     if (chess.length != 7) {
-                        JOptionPane.showMessageDialog(null, "棋盘错误，并非9*71\n错误编码：102",
+                        JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
                                 "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
                         reset();
                         return false;
@@ -384,7 +391,7 @@ public class GameController implements GameListener {
                 }
             }
                 catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "棋盘错误，并非9*72\n错误编码：102",
+                    JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
                             "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
                     reset();
                     return false;
@@ -419,7 +426,7 @@ public class GameController implements GameListener {
                         }
                         chessboard.capture(src, dest);
                         view.removeChessComponentAtGrid(dest);
-                        view.setChessComponentAtGrid(src, view.removeChessComponentAtGrid(dest));
+                        view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
                         selectedPoint = null;
                         swapColor();
                         view.revalidate();
@@ -435,5 +442,68 @@ public class GameController implements GameListener {
             }
         return true;
         }
+
+    public void AI() {
+        System.out.println("easyAI");
+
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(300);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                ChessboardPoint[] points = AIGetPoint();
+                ChessboardPoint src = points[0];
+                ChessboardPoint dest = points[1];
+
+                if (chessboard.getChessPieceAt(dest) == null){
+                    chessboard.moveChessPiece(src, dest);
+                    view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
+                } else {
+                    chessboard.capture(src, dest);
+                    view.removeChessComponentAtGrid(dest);
+                    view.setChessComponentAtGrid(dest, view.removeChessComponentAtGrid(src));
+                }
+                canStepPoints = null;
+                clearCanStep();
+                swapColor();
+                view.repaint();
+                view.gridComponents[dest.getRow()][dest.getCol()].revalidate();
+                checkWin();
+                if (winner != null){
+                    doWin();
+                    reset();
+                }
+            }
+        });
+        thread.start();
     }
+
+    public ChessboardPoint[] AIGetPoint(){
+        ArrayList<ChessboardPoint> canMove = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (chessboard.grid[i][j].getPiece() != null && chessboard.grid[i][j].getPiece().getOwner() == currentPlayer){
+                    ArrayList<ChessboardPoint> list = getCanStepPoints(new ChessboardPoint(i, j));
+                    if (list.size() != 0) canMove.add(new ChessboardPoint(i, j));
+                }
+            }
+        }
+
+        int size = canMove.size();
+        Random random = new Random();
+        int index = random.nextInt(size);
+        ChessboardPoint src = canMove.get(index);
+
+        ArrayList<ChessboardPoint> list = getCanStepPoints(src);
+        size = list.size();
+        index = random.nextInt(size);
+        ChessboardPoint dest = list.get(index);
+
+        return new ChessboardPoint[]{src, dest};
+    }
+}
 

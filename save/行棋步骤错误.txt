@@ -1,0 +1,13 @@
+2
+b (6,6) (5,8) null
+r (2,6) (3,6) null
+b
+L O O O O O T 
+O d O O O c O 
+r O l O w O O 
+O O O O O O E 
+O O O O O O O 
+O O O O O O r 
+E O w O l O O 
+O c O O O d O 
+T O O O O O L 

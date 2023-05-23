@@ -1,7 +1,6 @@
 package view;
 
 import controller.GameController;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -82,7 +81,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加标签
      */
     private void addLabel() {
-        statusLabel = new JLabel("Turn 1 : BLUE");
+        statusLabel = new JLabel("Turn : 1  BLUE");
         statusLabel.setLocation(HEIGTH, HEIGTH / 10);
         statusLabel.setSize(200, 60);
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));

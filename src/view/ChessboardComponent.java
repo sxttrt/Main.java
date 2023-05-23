@@ -27,6 +27,7 @@ public class ChessboardComponent extends JComponent {
     public GameController gameController;
 
     public ChessboardComponent(int chessSize) {
+
         CHESS_SIZE = chessSize;
         int width = CHESS_SIZE * 7;
         int height = CHESS_SIZE * 9;
