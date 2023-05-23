@@ -214,7 +214,7 @@ public class GameController implements GameListener {
                     && !chessPlace[i].equals("d")
                     && !chessPlace[i].equals("c")
                     && !chessPlace[i].equals("r")
-                    && !chessPlace[i].equals("+")) {
+                    && !chessPlace[i].equals("O")) {
                 return false;
             }
         }
