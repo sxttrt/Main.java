@@ -46,7 +46,7 @@ public class ChessboardComponent extends JComponent {
      * according to Chessboard information
      */
     public void initiateChessComponent(Chessboard chessboard) {
-        statusLabel = new JLabel();
+
         Cell[][] grid = chessboard.getGrid();
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {

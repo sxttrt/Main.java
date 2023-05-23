@@ -43,7 +43,6 @@ public class GameController implements GameListener {
         skip = false;
 
         view.registerController(this);
-        initialize();
         view.initiateChessComponent(chessboard);
         view.repaint();
     }
@@ -59,10 +58,12 @@ public class GameController implements GameListener {
     // after a valid move swap the player
     public void swapColor() {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
-        if (currentPlayer == PlayerColor.BLUE)
-            view.statusLabel.setText("Turn " + (chessboard.steps.size()/2 + 1) + ": BLUE");
-        else
-            view.statusLabel.setText("Turn " + (chessboard.steps.size()/2 + 1) + ": RED");
+        if (currentPlayer == PlayerColor.BLUE) {
+            view.statusLabel.setText("Turn " + (chessboard.steps.size() / 2 + 1) + ": BLUE");
+        }
+        else {
+            view.statusLabel.setText("Turn " + (chessboard.steps.size() / 2 + 1) + ": RED");
+        }
     }
 
     private boolean checkWin() {
