@@ -98,7 +98,7 @@ public class Chessboard {
         ChessPiece eater = removeChessPiece(src);
         ChessPiece enemy = removeChessPiece(dest);
         getGridAt(dest).setPiece(eater);
-        if (enemy.getOwner() == PlayerColor.BLUE) {
+        if (enemy.getOwner() == PlayerColor.RED) {
             deadRedChess.add(enemy);
         }
         else {
