@@ -307,6 +307,7 @@ public class GameController implements GameListener {
                 fileWriter.write(chessboard.steps.get(i).toString()+"\n");
             }
             fileWriter.write(currentPlayer == PlayerColor.BLUE ? "b" : "r"+"\n");
+
             for(int i=0;i<9;i++){
                 for(int j=0;j<7;j++){
                     ChessPiece chess = chessboard.grid[i][j].getPiece();
@@ -349,7 +350,7 @@ public class GameController implements GameListener {
 
             int num = Integer.parseInt(readList.remove(0));
 
-            for (int i = 0; i <= num; i++) {
+            for (int i = 0; i <=num; i++) {
                 String str = readList.get(i);
                 if (i % 2 == 0 && str.charAt(0) != 'b') {
                     JOptionPane.showMessageDialog(null, "行棋方错误\n错误编码：104",
@@ -366,10 +367,10 @@ public class GameController implements GameListener {
             }
 
             try {
-                for (int i = num + 1; i < num + 10; i++) {
+                for (int i = num+1 ; i < num + 10; i++) {
                     String[] chess = readList.get(i).split(" ");
                     if (chess.length != 7) {
-                        JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
+                        JOptionPane.showMessageDialog(null, "棋盘错误，并非9*71\n错误编码：102",
                                 "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
                         reset();
                         return false;
@@ -383,7 +384,7 @@ public class GameController implements GameListener {
                 }
             }
                 catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "棋盘错误，并非9*7\n错误编码：102",
+                    JOptionPane.showMessageDialog(null, "棋盘错误，并非9*72\n错误编码：102",
                             "载入存档出现错误", JOptionPane.ERROR_MESSAGE);
                     reset();
                     return false;
@@ -392,7 +393,7 @@ public class GameController implements GameListener {
                 reset();
                 for (int i = 0; i < num; i++) {
                     String[] step = readList.get(i).split(" ");
-                    ChessboardPoint src = new ChessboardPoint(Integer.parseInt(step[1].charAt(1) + " "), Integer.parseInt(step[1].charAt(3) + " "));
+                    ChessboardPoint src = new ChessboardPoint(Integer.parseInt(step[1].charAt(1) + ""), Integer.parseInt(step[1].charAt(3) + ""));
                     ChessboardPoint dest = new ChessboardPoint(Integer.parseInt(step[2].charAt(1) + ""), Integer.parseInt(step[2].charAt(3) + ""));
 
                     boolean isCapture = !step[3].equals("null");
