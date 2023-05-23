@@ -394,7 +394,7 @@ public class GameController implements GameListener {
                 for (int i = 0; i < num; i++) {
                     String[] step = readList.get(i).split(" ");
                     ChessboardPoint src = new ChessboardPoint(Integer.parseInt(step[1].charAt(1) + ""), Integer.parseInt(step[1].charAt(3) + ""));
-                    ChessboardPoint dest = new ChessboardPoint(Integer.parseInt(step[2].charAt(1) + ""), Integer.parseInt(step[2].charAt(3) + ""));
+                    ChessboardPoint dest = new ChessboardPoint(Integer.parseInt(step[2].charAt(1) + ""), Integer.parseInt(step[2].charAt(3) + "")) ;
 
                     boolean isCapture = !step[3].equals("null");
                     if (!isCapture) {
