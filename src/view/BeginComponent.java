@@ -11,6 +11,7 @@ import java.awt.*;
 public class BeginComponent extends JFrame {
     ChessGameFrame gameFrame;
     ChessGameFrame information;
+    AIComponent aiFrame;
 
 
     private final int WIDTH;
@@ -33,6 +34,7 @@ public class BeginComponent extends JFrame {
 
 
         addBeginButton();
+        addAIButton();
 
         Image image = new ImageIcon("resource/background/bg.png").getImage();
         image = image.getScaledInstance(500, 900, Image.SCALE_DEFAULT);
@@ -53,7 +55,21 @@ public class BeginComponent extends JFrame {
             gameFrame.getChessboardComponent().gameController.reset();
             gameFrame.setVisible(true);
         });
-        button.setLocation(150, 350);
+        button.setLocation(150, 250);
+        button.setSize(200, 100);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+    }
+
+
+    private void addAIButton() {
+        JButton button = new JButton("AI");
+        button.addActionListener((e) -> {
+            this.setVisible(false);
+            gameFrame.getChessboardComponent().gameController.AIPlaying = true;
+            gameFrame.setVisible(true);
+        });
+        button.setLocation(150, 520);
         button.setSize(200, 100);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);

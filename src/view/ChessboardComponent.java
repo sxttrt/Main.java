@@ -115,15 +115,15 @@ public class ChessboardComponent extends JComponent {
                     cell = new CellComponent(Color.CYAN, calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 }else if (trapCell.contains(temp)){
-                    cell = new CellComponent(Color.RED,calculatePoint(i, j), CHESS_SIZE );
+                    cell = new CellComponent(Color.red,calculatePoint(i, j), CHESS_SIZE );
                     this.add(cell);
                 }
                 else if (denCell.contains(temp)){
-                    cell = new CellComponent(Color.BLUE,calculatePoint(i, j), CHESS_SIZE);
+                    cell = new CellComponent(Color.black,calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 }
                 else {
-                    cell = new CellComponent(Color.GREEN,calculatePoint(i, j), CHESS_SIZE );
+                    cell = new CellComponent(Color.white,calculatePoint(i, j), CHESS_SIZE );
                     this.add(cell);
                 }
                 gridComponents[i][j] = cell;
