@@ -46,7 +46,7 @@ public class BeginComponent extends JFrame {
     }
 
     private void addBeginButton() {
-        JButton button = new JButton("BEGIN");
+        JButton button = new JButton("BATTLE");
         button.addActionListener((e) -> {
             this.setVisible(false);
 

@@ -59,6 +59,10 @@ public class GameController implements GameListener {
     // after a valid move swap the player
     public void swapColor() {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
+        if (currentPlayer == PlayerColor.BLUE)
+            view.statusLabel.setText("Turn " + (chessboard.steps.size()/2 + 1) + ": BLUE");
+        else
+            view.statusLabel.setText("Turn " + (chessboard.steps.size()/2 + 1) + ": RED");
     }
 
     private boolean checkWin() {
@@ -178,6 +182,7 @@ public class GameController implements GameListener {
         currentPlayer = PlayerColor.BLUE;
         selectedPoint = null;
         clearCanStep();
+        view.statusLabel.setText("Turn 1: BLUE");
         chessboard.steps = new ArrayList<>();
         chessboard.deadBlueChess = new ArrayList<>();
         chessboard.deadRedChess = new ArrayList<>();
