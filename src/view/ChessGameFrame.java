@@ -10,6 +10,7 @@ import java.awt.*;
  */
 public class ChessGameFrame extends JFrame {
     //    public final Dimension FRAME_SIZE ;
+    public BeginComponent beginFrame;
     private final int WIDTH;
     private final int HEIGTH;
 

@@ -1,6 +1,6 @@
 import controller.GameController;
 import model.Chessboard;
-import view.Begin;
+import view.BeginComponent;
 import view.ChessGameFrame;
 
 import javax.swing.*;
@@ -11,9 +11,8 @@ public class Main {
 //        Begin begin = new Begin();
 //        begin.init();
         SwingUtilities.invokeLater(() -> {
-            ChessGameFrame mainFrame = new ChessGameFrame(1100, 810);
-            GameController gameController = new GameController(mainFrame.getChessboardComponent(), new Chessboard());
-            mainFrame.setVisible(true);
+            BeginComponent beginFrame = new BeginComponent();
+            beginFrame.setVisible(true);
            new BackgroundMusic().playMusic("resource\\bgm\\bgm3.wav");
         });
     }
