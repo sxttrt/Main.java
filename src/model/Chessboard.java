@@ -121,28 +121,28 @@ public class Chessboard {
             return false;
         }
         if (myChess.getName().equals("Elephant")){
-            return  checkDistance(src,dest) && !isRiver(dest);
+            return  checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest);
         }
         if (myChess.getName().equals("Lion")){
-            return (checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest);
+            return (checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest)) || canJumpRiver(src, dest);
         }
         if (myChess.getName().equals("Tiger")){
-            return (checkDistance(src,dest) && !isRiver(dest)) || canJumpRiver(src, dest);
+            return (checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest)) || canJumpRiver(src, dest);
         }
         if (myChess.getName().equals("Leopard")){
-            return checkDistance(src,dest) && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest)&& !checkIsOwnDen(src,dest);
         }
         if (myChess.getName().equals("Wolf")){
-            return checkDistance(src,dest) && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest);
         }
         if (myChess.getName().equals("Dog")){
-            return checkDistance(src,dest) && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest);
         }
         if (myChess.getName().equals("Cat")){
-            return checkDistance(src,dest) && !isRiver(dest);
+            return checkDistance(src,dest) && !isRiver(dest) && !checkIsOwnDen(src,dest);
         }
         if (myChess.getName().equals("Rat")){
-            return checkDistance(src,dest);
+            return checkDistance(src,dest) && !checkIsOwnDen(src,dest);
         }
         return false;
     }
@@ -191,6 +191,21 @@ public class Chessboard {
                 && point.getRow() <= 5
                 && (point.getCol() == 1 || point.getCol() == 2 || point.getCol() == 4 || point.getCol() == 5);
 
+    }
+    public  boolean isOwnDen(ChessboardPoint point, PlayerColor color){
+        if (color == PlayerColor.BLUE){
+            return (point.getRow() == 8 && point.getCol() == 3);
+        }
+        else {
+            return (point.getRow() == 0 && point.getCol() == 3);
+        }
+    }
+
+    private boolean checkIsOwnDen(ChessboardPoint src,ChessboardPoint dest) {
+        if (isOwnDen(dest,getChessPieceAt(src).getOwner())){
+            return true;
+        }
+        return false;
     }
 
     private boolean isEnemyTrap(ChessboardPoint point, PlayerColor color){
