@@ -22,7 +22,7 @@ public class ChessGameFrame extends JFrame {
     public final JLabel springBG;
     public final JLabel autumnBG;
     public ChessGameFrame(int width, int height) {
-        setTitle("Jungle"); //设置标题
+        setTitle("斗兽棋"); //设置标题
         this.WIDTH = width;
         this.HEIGTH = height;
         this.ONE_CHESS_SIZE = (HEIGTH * 4 / 5) / 9;
