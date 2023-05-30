@@ -33,7 +33,7 @@ public class CellComponent extends JPanel {
         g.fillRect(1, 1, this.getWidth()-1, this.getHeight()-1);
         if (canStep) {
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(new Color(0, 0, 0, 150));
+            g2d.setColor(new Color(103, 83, 83, 234));
 
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(1, 1,
                     this.getWidth() - 1, this.getHeight() - 1, size / 4, size / 4);
