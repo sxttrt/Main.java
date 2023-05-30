@@ -40,6 +40,7 @@ public class ChessGameFrame extends JFrame {
         addPlaybackButton();
         addSaveButton();
         addLoadButton();
+        addBackButton();
 
         Image image = new ImageIcon("resource/background/spring.png").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
@@ -80,10 +81,10 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加标签
      */
     private void addLabel() {
-        statusLabel = new JLabel("Turn 1: BLUE");
+        statusLabel = new JLabel("回合 1: 蓝方");
         statusLabel.setLocation(HEIGTH, HEIGTH / 10);
         statusLabel.setSize(200, 60);
-        statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+        statusLabel.setFont(new Font("Simsun", Font.BOLD, 20));
         add(statusLabel);
     }
 
@@ -93,21 +94,21 @@ public class ChessGameFrame extends JFrame {
 
 
     private void addResetButton() {
-        JButton button = new JButton("Reset");
+        JButton button = new JButton("重开");
         button.addActionListener((e) -> {
             chessboardComponent.gameController.reset();
         });
         button.setLocation(HEIGTH, HEIGTH / 10 + 100);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
     }
 
     private void addRegretButton() {
-        JButton button = new JButton("Regret");
+        JButton button = new JButton("悔棋");
         button.setLocation(HEIGTH, HEIGTH / 10 + 200);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
             System.out.println("Click regret");
@@ -116,10 +117,10 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addThemeButton() {
-        JButton button = new JButton("Change Theme");
+        JButton button = new JButton("改主题");
         button.setLocation(HEIGTH, HEIGTH / 10 + 300);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
             System.out.println("Click change theme");
@@ -141,10 +142,10 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addPlaybackButton() {
-        JButton button = new JButton("playBack");
+        JButton button = new JButton("回放");
         button.setLocation(HEIGTH, HEIGTH / 10 + 400);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
 
         button.addActionListener(e -> {
@@ -154,10 +155,10 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addSaveButton() {
-        JButton button = new JButton("Save");
+        JButton button = new JButton("保存");
         button.setLocation(HEIGTH, HEIGTH / 10 + 500);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
 
         button.addActionListener(e -> {
@@ -173,10 +174,10 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addLoadButton() {
-        JButton button = new JButton("Load");
+        JButton button = new JButton("加载");
         button.setLocation(HEIGTH, HEIGTH / 10 + 600);
         button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
 
         button.addActionListener(e -> {
@@ -185,6 +186,21 @@ public class ChessGameFrame extends JFrame {
             if (b) new LoadComponent();
         });
     }
+
+    private void addBackButton() {
+        JButton button = new JButton("返回");
+        button.setLocation(HEIGTH - 800, HEIGTH/ 10 - 60);
+        button.setSize(180, 54);
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click back");
+            this.setVisible(false);
+            beginFrame.setVisible(true);
+        });
+    }
+
 
 
 

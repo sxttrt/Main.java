@@ -59,10 +59,10 @@ public class GameController implements GameListener {
     public void swapColor() {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
         if (currentPlayer == PlayerColor.BLUE) {
-            view.statusLabel.setText("Turn " + (chessboard.steps.size() / 2 + 1) + ": BLUE");
+            view.statusLabel.setText("回合 " + (chessboard.steps.size() / 2 + 1) + ": 蓝方");
         }
         else {
-            view.statusLabel.setText("Turn " + (chessboard.steps.size() / 2 + 1) + ": RED");
+            view.statusLabel.setText("回合 " + (chessboard.steps.size() / 2 + 1) + ": 红方");
         }
     }
 
@@ -183,7 +183,7 @@ public class GameController implements GameListener {
         currentPlayer = PlayerColor.BLUE;
         selectedPoint = null;
         clearCanStep();
-        view.statusLabel.setText("Turn 1: BLUE");
+        view.statusLabel.setText("回合 1: 蓝方");
         chessboard.steps = new ArrayList<>();
         chessboard.deadBlueChess = new ArrayList<>();
         chessboard.deadRedChess = new ArrayList<>();

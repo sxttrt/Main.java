@@ -46,7 +46,7 @@ public class BeginComponent extends JFrame {
     }
 
     private void addBeginButton() {
-        JButton button = new JButton("BATTLE");
+        JButton button = new JButton("开始游戏");
         button.addActionListener((e) -> {
             this.setVisible(false);
 
@@ -57,13 +57,13 @@ public class BeginComponent extends JFrame {
         });
         button.setLocation(150, 250);
         button.setSize(200, 100);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
     }
 
 
     private void addAIButton() {
-        JButton button = new JButton("AI");
+        JButton button = new JButton("人机");
         button.addActionListener((e) -> {
             this.setVisible(false);
             gameFrame.getChessboardComponent().gameController.AIPlaying = true;
@@ -71,7 +71,7 @@ public class BeginComponent extends JFrame {
         });
         button.setLocation(150, 520);
         button.setSize(200, 100);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
     }
 
