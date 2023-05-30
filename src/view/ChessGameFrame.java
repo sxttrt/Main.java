@@ -111,7 +111,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
-            System.out.println("Click regret");
+            System.out.println("悔棋");
             chessboardComponent.gameController.regret();
         });
     }
@@ -123,7 +123,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
-            System.out.println("Click change theme");
+            System.out.println("改变主题");
             chessboardComponent.changeTheme(isSpring);
             if (isSpring){
                 remove(background);
@@ -149,7 +149,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("Click playback");
+            System.out.println("回放");
             chessboardComponent.gameController.playBack();
         });
     }
@@ -162,7 +162,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("Click save");
+            System.out.println("保存");
             String path = JOptionPane.showInputDialog("存档名");
             while (path.equals("")){
                 JOptionPane.showMessageDialog(null, "存档名不能为空");
@@ -181,7 +181,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("Click load");
+            System.out.println("加载");
             boolean b = chessboardComponent.gameController.loadGame();
             if (b) new LoadComponent();
         });
@@ -195,7 +195,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("Click back");
+            System.out.println("返回");
 
             this.setVisible(false);
             beginFrame.setVisible(true);

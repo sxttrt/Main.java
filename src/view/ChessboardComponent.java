@@ -82,6 +82,23 @@ public class ChessboardComponent extends JComponent {
 
     }
 
+    int red = 109;
+    int green = 202;
+    int blue = 247;
+    int red1 = 255;
+    int green1 = 255;
+    int blue1 = 255;
+    int red2 = 0;
+    int green2 = 70;
+    int blue2 = 92;
+    int red3 = 127;
+    int green3 = 208;
+    int blue3 = 127;
+
+    Color riverColor = new Color(red, green, blue);
+    Color trapColor = new Color(red1, green1, blue1);
+    Color denColor = new Color(red2, green2, blue2);
+    Color grassColor = new Color(red3, green3, blue3);
     public void initiateGridComponents() {
 
         riverCell.add(new ChessboardPoint(3,1));
@@ -114,18 +131,18 @@ public class ChessboardComponent extends JComponent {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 CellComponent cell;
                 if (riverCell.contains(temp)) {
-                    cell = new CellComponent(Color.CYAN, calculatePoint(i, j), CHESS_SIZE);
+                    cell = new CellComponent(riverColor, calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 }else if (trapCell.contains(temp)){
-                    cell = new CellComponent(Color.red,calculatePoint(i, j), CHESS_SIZE );
+                    cell = new CellComponent(denColor,calculatePoint(i, j), CHESS_SIZE );
                     this.add(cell);
                 }
                 else if (denCell.contains(temp)){
-                    cell = new CellComponent(Color.black,calculatePoint(i, j), CHESS_SIZE);
+                    cell = new CellComponent(trapColor,calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 }
                 else {
-                    cell = new CellComponent(Color.white,calculatePoint(i, j), CHESS_SIZE );
+                    cell = new CellComponent(grassColor,calculatePoint(i, j), CHESS_SIZE );
                     this.add(cell);
                 }
                 gridComponents[i][j] = cell;
