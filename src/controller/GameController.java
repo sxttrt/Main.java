@@ -3,6 +3,7 @@ package controller;
 
 import listener.GameListener;
 import model.*;
+import model.Timer;
 import view.CellComponent;
 import view.ChessboardComponent;
 import view.ChessGameFrame;
@@ -33,12 +34,14 @@ public class GameController implements GameListener {
     // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
     private Thread thread;
+    public JLabel timeLabel;
     public static Timer timer;
     public GameController(ChessboardComponent view, Chessboard chessboard) {
         this.view = view;
         this.chessboard = chessboard;
         this.currentPlayer = PlayerColor.BLUE;
         this.winner = null;
+        timeLabel = view.timeLabel;
         isPlayback = false;
         skip = false;
 
@@ -66,7 +69,7 @@ public class GameController implements GameListener {
         }
     }
 
-    private boolean checkWin() {
+    public boolean checkWin() {
         if (chessboard.grid[0][3].getPiece() != null || chessboard.deadRedChess.size() == 8) {
             this.winner = PlayerColor.BLUE;
         }
@@ -190,7 +193,7 @@ public class GameController implements GameListener {
         view.revalidate();
         view.repaint();
         winner = null;
-        AIPlaying=false;
+        timer.time = 45;
 
         chessboard.deadRedChess = new ArrayList<>();
         chessboard.deadBlueChess = new ArrayList<>();

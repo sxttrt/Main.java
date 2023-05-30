@@ -26,9 +26,11 @@ public class ChessboardComponent extends JComponent {
 
     public GameController gameController;
     public JLabel statusLabel;
+    public JLabel timeLabel;
 
-    public ChessboardComponent(int chessSize,JLabel statusLabel) {
+    public ChessboardComponent(int chessSize,JLabel statusLabel,JLabel timeLabel) {
         this.statusLabel = statusLabel;
+        this.timeLabel = timeLabel;
         CHESS_SIZE = chessSize;
         int width = CHESS_SIZE * 7;
         int height = CHESS_SIZE * 9;

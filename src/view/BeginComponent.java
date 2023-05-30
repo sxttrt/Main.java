@@ -2,7 +2,7 @@ package view;
 
 import controller.GameController;
 import model.Chessboard;
-
+import model.Timer;
 
 
 import javax.swing.*;
@@ -49,9 +49,16 @@ public class BeginComponent extends JFrame {
         JButton button = new JButton("开始游戏");
         button.addActionListener((e) -> {
             this.setVisible(false);
+            this.setVisible(false);
+            model.Timer.time = 45;
+            if (GameController.timer == null){
+                GameController.timer = new Timer(gameFrame.getChessboardComponent().gameController);
+                GameController.timer.start();
+            }
 
             gameFrame.statusLabel.setLocation(770, 81);
             gameFrame.repaint();
+            gameFrame.getChessboardComponent().gameController.AIPlaying =false;
             gameFrame.getChessboardComponent().gameController.reset();
             gameFrame.setVisible(true);
         });

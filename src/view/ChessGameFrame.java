@@ -1,6 +1,6 @@
 package view;
 
-import controller.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,6 +17,7 @@ public class ChessGameFrame extends JFrame {
 
     private ChessboardComponent chessboardComponent;
     JLabel statusLabel;
+    JLabel timeLabel;
     public boolean isSpring;
     JLabel background;
     public final JLabel springBG;
@@ -33,6 +34,7 @@ public class ChessGameFrame extends JFrame {
         setLayout(null);
 
         addLabel();
+        addTimeLabel();
         addChessboard();
         addResetButton();
         addRegretButton();
@@ -72,7 +74,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加棋盘
      */
     private void addChessboard() {
-        chessboardComponent = new ChessboardComponent(ONE_CHESS_SIZE,statusLabel);
+        chessboardComponent = new ChessboardComponent(ONE_CHESS_SIZE,statusLabel,timeLabel);
         chessboardComponent.setLocation(HEIGTH / 5, HEIGTH / 10);
         add(chessboardComponent);
     }
@@ -86,6 +88,13 @@ public class ChessGameFrame extends JFrame {
         statusLabel.setSize(200, 60);
         statusLabel.setFont(new Font("Simsun", Font.BOLD, 20));
         add(statusLabel);
+    }
+    private void addTimeLabel() {
+        timeLabel = new JLabel("Time: 45");
+        timeLabel.setLocation(HEIGHT +900, HEIGHT/ 10+80);
+        timeLabel.setSize(200, 60);
+        timeLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(timeLabel);
     }
 
     /**
@@ -111,7 +120,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
-            System.out.println("悔棋");
+            System.out.println("Click regret");
             chessboardComponent.gameController.regret();
         });
     }
@@ -123,7 +132,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Simsun", Font.BOLD, 20));
         add(button);
         button.addActionListener((e) -> {
-            System.out.println("改变主题");
+            System.out.println("Click change theme");
             chessboardComponent.changeTheme(isSpring);
             if (isSpring){
                 remove(background);
@@ -149,7 +158,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("回放");
+            System.out.println("Click playback");
             chessboardComponent.gameController.playBack();
         });
     }
@@ -162,7 +171,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("保存");
+            System.out.println("Click save");
             String path = JOptionPane.showInputDialog("存档名");
             while (path.equals("")){
                 JOptionPane.showMessageDialog(null, "存档名不能为空");
@@ -181,7 +190,7 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("加载");
+            System.out.println("Click load");
             boolean b = chessboardComponent.gameController.loadGame();
             if (b) new LoadComponent();
         });
@@ -195,8 +204,8 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("返回");
-
+            System.out.println("Click back");
+            getChessboardComponent().gameController.AIPlaying = true;
             this.setVisible(false);
             beginFrame.setVisible(true);
         });
