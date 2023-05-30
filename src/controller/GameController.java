@@ -84,6 +84,7 @@ public class GameController implements GameListener {
     @Override
     public void onPlayerClickCell(ChessboardPoint point, CellComponent component) {
         if (selectedPoint != null && chessboard.isValidMove(selectedPoint, point)) {
+            new SoundEffect().playEffect("src\\resource\\sound\\click.wav");
             chessboard.moveChessPiece(selectedPoint, point);
             clearCanStep();
             canStepPoints = null;
@@ -107,6 +108,7 @@ public class GameController implements GameListener {
     @Override
     public void onPlayerClickChessPiece(ChessboardPoint point, Animal component) {
         if (selectedPoint == null) {
+            new SoundEffect().playEffect("src\\resource\\sound\\click.wav");
             if (chessboard.getChessPieceOwner(point).equals(currentPlayer)) {
                 canStepPoints = getCanStepPoints(point);
                 selectedPoint = point;
@@ -117,6 +119,7 @@ public class GameController implements GameListener {
                 view.repaint();
             }
         } else if (selectedPoint.equals(point)) {
+            new SoundEffect().playEffect("src\\resource\\sound\\click.wav");
             selectedPoint = null;
             canStepPoints = null;
             clearCanStep();
@@ -126,6 +129,7 @@ public class GameController implements GameListener {
             view.revalidate();
             view.repaint();
         } else if (chessboard.isValidCapture(selectedPoint, point)) {
+            new SoundEffect().playEffect("src\\resource\\sound\\click2.wav");
             chessboard.capture(selectedPoint, point);
             view.removeChessComponentAtGrid(point);
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
