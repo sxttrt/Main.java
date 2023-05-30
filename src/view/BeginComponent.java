@@ -66,8 +66,8 @@ public class BeginComponent extends JFrame {
         JButton button = new JButton("人机");
         button.addActionListener((e) -> {
             this.setVisible(false);
-            gameFrame.getChessboardComponent().gameController.AIPlaying = true;
             gameFrame.getChessboardComponent().gameController.reset();
+            gameFrame.getChessboardComponent().gameController.AIPlaying = true;
             gameFrame.setVisible(true);
         });
         button.setLocation(150, 520);

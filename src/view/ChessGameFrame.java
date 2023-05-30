@@ -196,6 +196,7 @@ public class ChessGameFrame extends JFrame {
 
         button.addActionListener(e -> {
             System.out.println("Click back");
+
             this.setVisible(false);
             beginFrame.setVisible(true);
         });

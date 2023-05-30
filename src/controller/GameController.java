@@ -190,6 +190,7 @@ public class GameController implements GameListener {
         view.revalidate();
         view.repaint();
         winner = null;
+        AIPlaying=false;
 
         chessboard.deadRedChess = new ArrayList<>();
         chessboard.deadBlueChess = new ArrayList<>();
