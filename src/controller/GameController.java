@@ -454,8 +454,6 @@ public class GameController implements GameListener {
         }
 
     public void AI() {
-        System.out.println("easyAI");
-
         thread = new Thread(new Runnable() {
             @Override
             public void run() {

@@ -16,7 +16,7 @@ public class Timer extends Thread {
                 while(time > 0) {
                     time--;
                     try {
-                        Thread.sleep(300);
+                        Thread.sleep(1000);
                         gamecontroller.timeLabel.setText("Time: " + time);
                         if (gamecontroller.currentPlayer != player){
                             gamecontroller.swapColor();
