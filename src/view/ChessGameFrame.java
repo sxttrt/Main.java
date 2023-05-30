@@ -91,7 +91,7 @@ public class ChessGameFrame extends JFrame {
     }
     private void addTimeLabel() {
         timeLabel = new JLabel("Time: 45");
-        timeLabel.setLocation(HEIGHT +900, HEIGHT/ 10+80);
+        timeLabel.setLocation(HEIGHT +370, HEIGHT/ 10+20);
         timeLabel.setSize(200, 60);
         timeLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(timeLabel);
