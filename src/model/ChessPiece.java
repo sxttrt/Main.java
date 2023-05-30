@@ -4,8 +4,6 @@ package model;
 public class ChessPiece {
     // the owner of the chess
     private PlayerColor owner;
-
-    // Elephant? Cat? Dog? ...
     private String name;
 
     public int getRank() {
@@ -19,12 +17,6 @@ public class ChessPiece {
         this.name = name;
         this.rank = rank;
     }
-
-    public boolean canCapture(ChessPiece target) {
-        // TODO: Finish this method!
-        return false;
-    }
-
     public String getName() {
         return name;
     }

@@ -1,7 +1,5 @@
-import controller.GameController;
-import model.Chessboard;
+
 import view.BeginComponent;
-import view.ChessGameFrame;
 
 import javax.swing.*;
 import model.BackgroundMusic;

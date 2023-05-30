@@ -6,7 +6,6 @@ import model.*;
 import model.Timer;
 import view.CellComponent;
 import view.ChessboardComponent;
-import view.ChessGameFrame;
 import view.animal.*;
 import javax.swing.*;
 import java.io.*;
@@ -31,7 +30,6 @@ public class GameController implements GameListener {
     public boolean skip;
     public boolean isPlayback;
 
-    // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
     private Thread thread;
     public JLabel timeLabel;
@@ -58,7 +56,6 @@ public class GameController implements GameListener {
         }
     }
 
-    // after a valid move swap the player
     public void swapColor() {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
         if (currentPlayer == PlayerColor.BLUE) {
@@ -84,7 +81,6 @@ public class GameController implements GameListener {
     }
 
 
-    // click an empty cell
     @Override
     public void onPlayerClickCell(ChessboardPoint point, CellComponent component) {
         if (selectedPoint != null && chessboard.isValidMove(selectedPoint, point)) {
@@ -501,14 +497,13 @@ public class GameController implements GameListener {
             }
         }
 
-        int size = canMove.size();
+
         Random random = new Random();
-        int index = random.nextInt(size);
+        int index = random.nextInt(canMove.size());
         ChessboardPoint src = canMove.get(index);
 
         ArrayList<ChessboardPoint> list = getCanStepPoints(src);
-        size = list.size();
-        index = random.nextInt(size);
+        index = random.nextInt(list.size());
         ChessboardPoint dest = list.get(index);
 
         return new ChessboardPoint[]{src, dest};
