@@ -44,14 +44,14 @@ public class ChessGameFrame extends JFrame {
         addLoadButton();
         addBackButton();
 
-        Image image = new ImageIcon("resource/background/spring.png").getImage();
+        Image image = new ImageIcon("src\\resource/background/spring.png").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(image);
         springBG = new JLabel(icon);
         springBG.setSize(1100, 810);
         springBG.setLocation(0, 0);
 
-        image = new ImageIcon("resource/background/autumn.png").getImage();
+        image = new ImageIcon("src\\resource/background/autumn.png").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
         icon = new ImageIcon(image);
         autumnBG = new JLabel(icon);

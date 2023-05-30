@@ -201,7 +201,7 @@ public class ChessboardComponent extends JComponent {
     protected void processMouseEvent(MouseEvent e) {
         if (e.getID() == MouseEvent.MOUSE_PRESSED) {
 
-                new SoundEffect().playEffect("resource\\sound\\click.wav");
+                new SoundEffect().playEffect("src\\resource\\sound\\click.wav");
                 JComponent clickedComponent = (JComponent) getComponentAt(e.getX(), e.getY());
                 if (clickedComponent.getComponentCount() == 0) {
                     System.out.print("None chess here and ");

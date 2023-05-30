@@ -36,7 +36,7 @@ public class BeginComponent extends JFrame {
         addBeginButton();
         addAIButton();
 
-        Image image = new ImageIcon("resource/background/bg.png").getImage();
+        Image image = new ImageIcon("src\\resource/background/bg.png").getImage();
         image = image.getScaledInstance(500, 900, Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(image);
         JLabel bg = new JLabel(icon);

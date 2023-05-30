@@ -28,9 +28,9 @@ public class Leopard extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\animal\\blueLeopard.png");
+            pic = new ImageIcon("src\\resource\\animal\\blueLeopard.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\animal\\redLeopard.png");
+            pic = new ImageIcon("src\\resource\\animal\\redLeopard.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

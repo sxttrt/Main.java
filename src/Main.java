@@ -11,7 +11,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             BeginComponent beginFrame = new BeginComponent();
             beginFrame.setVisible(true);
-           new BackgroundMusic().playMusic("resource\\bgm\\bgm3.wav");
+           new BackgroundMusic().playMusic("src\\resource\\bgm\\bgm3.wav");
         });
     }
 }

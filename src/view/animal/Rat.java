@@ -28,9 +28,9 @@ public class Rat extends Animal {
         super.paintComponent(g);
         ImageIcon pic = new ImageIcon();
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\animal\\blueRat.png");
+            pic = new ImageIcon("src\\resource\\animal\\blueRat.png");
         }else if(owner == PlayerColor.RED){
-            pic = new ImageIcon("resource\\animal\\redRat.png");
+            pic = new ImageIcon("src\\resource\\animal\\redRat.png");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

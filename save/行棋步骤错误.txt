@@ -1,5 +1,5 @@
 2
-b (6,6) (5,8) null
+b (6,6) (4,6) null
 r (2,6) (3,6) null
 b
 L O O O O O T 
