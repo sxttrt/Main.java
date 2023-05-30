@@ -179,6 +179,7 @@ public class ChessGameFrame extends JFrame {
             }
             chessboardComponent.gameController.saveGame(path);
             new LoadComponent();
+
         });
     }
 
